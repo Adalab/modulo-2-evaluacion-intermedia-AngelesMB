@@ -1,6 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.container {
+  display: flex;
+  width: 800px;
+  height: 300px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #e6f1f3;
+}
+.title {
+  text-transform: capitalize;
+}
+.button {
+  background-color: #14d9c4;
+}
+.message {
+  background-color: #14d9c4;
+  width: 300px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+}
+
 .hidden {
-    display: none;
+  display: none;
 }
 .showResetButton {
-    display: block
+  display: block;
 }

@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
     <title>Evaluación Intermedia AngelesMB</title>
   </head>
   <body>
     <h1>Juego piedra, papel y tijera</h1>
-    <h3>Introduce aquí tu jugada:</h3>
+    <label for="gameOptions">Introduce aquí tu jugada:</label>
     <form action="">
-      <select name="" id="">
-        <option value="">Seleccione su jugada</option>
-        <option value="">Piedra</option>
-        <option value="">Papel</option>
-        <option value="">Tijera</option>
+      <select name="gameOptions" id="gameOptions" class="js-select">
+        <option value="" disabled selected>Seleccione su jugada</option>
+        <option value="rock">Piedra</option>
+        <option value="paper">Papel</option>
+        <option value="scissors">Tijera</option>
       </select>
-      <input type="submit" value="Jugar" />
+      <input type="submit" value="Jugar" class="js-button" />
     </form>
     <div>
-      <span>Vamos a Jugar!</span>
+      <span class="js-resultMessage">¡Vamos a Jugar!</span>
     </div>
-    <div><span>Jugador: </span><span></span></div>
-    <div><span>Computadora: </span><span></span></div>
+    <div><span>Jugador: </span><span class="js-playerCount"></span></div>
+    <div><span>Computadora: </span><span class="js-computerCount"></span></div>
     <script src="./js/main.js"></script>
   </body>
 </html>

@@ -11,6 +11,7 @@ const computerCountElement = document.querySelector(".js-computerCount");
 let userSelection = "";
 let computerSelection = "";
 let winner = "";
+let winnerName = "";
 
 // función para pasar a num el contador
 function parseCount(count) {
@@ -114,24 +115,34 @@ function updateCount(winner) {
   if (winner !== "") {
     if (winner === "user") {
       playerCount++;
-      //   playerCountElement = playerCount;
+      playerCountElement.innerHTML = playerCount;
       console.log("contador usuaria", playerCount);
       console.log("contador computadora", computerCount);
     } else {
       computerCount++;
-      //   computerCountElement = computerCount;
+      computerCountElement.innerHTML = computerCount;
       console.log("contador usuaria", playerCount);
       console.log("contador computadora", computerCount);
     }
   }
 }
 
+function getNameForWinner(winner) {
+  if (winner === "user") {
+    winnerName = "Usuaria";
+  } else {
+    winnerName = "Computadora";
+  }
+}
+
 // función reset contadores
 function resetCount(count) {
-  if (count > 3) {
+  getNameForWinner(winner);
+  if (count === 3) {
+    button.setAttribute("disabled", true);
     playerCount = 0;
     computerCount = 0;
-    resultMessage.innerHTML = "¡Vamos a jugar!";
+    resultMessage.innerHTML = `Partida terminada: has llegado a los 10 puntos y ha ganado la ${winnerName.toUpperCase()}`;
   }
 }
 

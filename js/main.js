@@ -22,9 +22,6 @@ function parseCount(count) {
 let playerCount = parseInt(playerCountElement.innerHTML);
 let computerCount = parseInt(computerCountElement.innerHTML);
 
-console.log("contador en string:", playerCountElement.innerHTML);
-console.log("contador parseado", playerCount);
-
 // función habilitar botón
 function enableButton(value) {
   if (value !== "") {
@@ -71,7 +68,6 @@ function getWordForValueComputer(value) {
 // función jugada ordenador según número aleatorio
 function getComputerSelection(value) {
   const randomNumber = getRandomNumber(9);
-  //   console.log(randomNumber);
   if (value !== "") {
     if (randomNumber <= 3) {
       computerSelection = "rock";
@@ -106,7 +102,6 @@ function compareSelections(value1, value2) {
     resultMessage.innerHTML = "¡Has perdido!";
     winner = "computer";
   }
-  console.log("Ganadora:", winner);
   return winner;
 }
 
@@ -116,13 +111,9 @@ function updateCount(winner) {
     if (winner === "user") {
       playerCount++;
       playerCountElement.innerHTML = playerCount;
-      console.log("contador usuaria", playerCount);
-      console.log("contador computadora", computerCount);
     } else {
       computerCount++;
       computerCountElement.innerHTML = computerCount;
-      console.log("contador usuaria", playerCount);
-      console.log("contador computadora", computerCount);
     }
   }
 }
@@ -157,6 +148,6 @@ function handleButtonClick(event) {
   resetCount(computerCount);
 }
 
-// listener
+// listeners
 selectElement.addEventListener("change", enableButton);
 button.addEventListener("click", handleButtonClick);

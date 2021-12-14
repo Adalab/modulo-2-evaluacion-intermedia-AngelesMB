@@ -3,6 +3,7 @@
 // elementos del html
 const selectElement = document.querySelector(".js-select");
 const button = document.querySelector(".js-button");
+const resetButton = document.querySelector(".js-resetButton");
 const resultMessage = document.querySelector(".js-resultMessage");
 const playerCountElement = document.querySelector(".js-playerCount");
 const computerCountElement = document.querySelector(".js-computerCount");
@@ -124,17 +125,41 @@ function getNameForWinner(winner) {
   } else {
     winnerName = "Computadora";
   }
+  return winnerName;
 }
 
 // función reset contadores
-function resetCount(count) {
+function endGame(count) {
   getNameForWinner(winner);
-  if (count === 10) {
-    button.setAttribute("disabled", true);
-    playerCount = 0;
-    computerCount = 0;
+  if (count === 3) {
     resultMessage.innerHTML = `Partida terminada: has llegado a los 10 puntos y ha ganado la ${winnerName.toUpperCase()}`;
+    button.classList.add("hidden");
+    resetButton.classList.add("showResetButton");
+    selectElement.setAttribute("disabled", true);
   }
+}
+
+function resetCount() {
+  playerCount = 0;
+  computerCount = 0;
+  playerCountElement.innerHTML = 0;
+  computerCountElement.innerHTML = 0;
+}
+
+function changeButtons() {
+  button.classList.remove("hidden");
+  resetButton.classList.remove("showResetButton");
+  resetButton.classList.add("hidden");
+  button.setAttribute("disabled", true);
+}
+
+function changeSelect() {
+  selectElement.removeAttribute("disabled");
+  selectElement.value = "";
+}
+
+function changeMessage() {
+  resultMessage.innerHTML = "¡Vamos a jugar!";
 }
 
 // función manejadora del click
@@ -144,10 +169,20 @@ function handleButtonClick(event) {
   getComputerSelection(userSelection);
   compareSelections(userSelection, computerSelection);
   updateCount(winner);
-  resetCount(playerCount);
-  resetCount(computerCount);
+  endGame(playerCount);
+  endGame(computerCount);
+}
+
+// función manejadora del click del resetButton
+function handleResetButtonClick(event) {
+  event.preventDefault();
+  resetCount();
+  changeButtons();
+  changeSelect();
+  changeMessage();
 }
 
 // listeners
 selectElement.addEventListener("change", enableButton);
 button.addEventListener("click", handleButtonClick);
+resetButton.addEventListener("click", handleResetButtonClick);

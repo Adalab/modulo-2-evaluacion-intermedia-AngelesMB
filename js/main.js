@@ -82,26 +82,27 @@ function getComputerSelection(value) {
   return computerSelection;
 }
 
+// función para imprimir y asignar ganadora
+function renderWinner(message, winnerValue) {
+  resultMessage.innerHTML = message;
+  winner = winnerValue;
+}
+
 // función para comparar values
 function compareSelections(value1, value2) {
   if (value1 === value2) {
-    resultMessage.innerHTML = "Empate";
-    winner = "";
+    renderWinner("Empate", "");
   } else if (
     value1 === "rock" &&
     (value2 === "paper" || value2 === "scissors")
   ) {
-    resultMessage.innerHTML = "¡Has ganado!";
-    winner = "user";
+    renderWinner("¡Has ganado!", "user");
   } else if (value1 === "scissors" && value2 === "paper") {
-    resultMessage.innerHTML = "¡Has ganado!";
-    winner = "user";
+    renderWinner("¡Has ganado!", "user");
   } else if (value1 === "paper" && value2 === "rock") {
-    resultMessage.innerHTML = "¡Has ganado!";
-    winner = "user";
+    renderWinner("¡Has ganado!", "user");
   } else {
-    resultMessage.innerHTML = "¡Has perdido!";
-    winner = "computer";
+    renderWinner("¡Has perdido!", "computer");
   }
   return winner;
 }

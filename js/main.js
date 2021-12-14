@@ -129,7 +129,7 @@ function getNameForWinner(winner) {
 // función reset contadores
 function resetCount(count) {
   getNameForWinner(winner);
-  if (count === 3) {
+  if (count === 10) {
     button.setAttribute("disabled", true);
     playerCount = 0;
     computerCount = 0;

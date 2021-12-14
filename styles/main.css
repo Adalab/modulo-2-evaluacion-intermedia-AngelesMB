@@ -6,6 +6,7 @@
 }
 .container {
   display: flex;
+  margin: auto;
   width: 800px;
   height: 300px;
   flex-direction: column;

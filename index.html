@@ -9,28 +9,33 @@
   </head>
   <body>
     <div class="container">
-    <h1 class="title">Juego piedra, papel y tijera</h1>
-    <label for="gameOptions">Introduce aquí tu jugada:</label>
-    <form action="">
-      <select name="gameOptions" id="gameOptions" class="js-select">
-        <option value="" disabled selected>Seleccione su jugada</option>
-        <option value="rock">Piedra</option>
-        <option value="paper">Papel</option>
-        <option value="scissors">Tijera</option>
-      </select>
-      <input type="submit" value="Jugar" class="button js-button" disabled />
-      <input
-        type="reset"
-        value="Reiniciar juego"
-        class="js-resetButton hidden"
-      />
-    </form>
-    <div class="message">
-      <span class="js-resultMessage">¡Vamos a Jugar!</span>
+      <h1 class="title">Juego piedra, papel y tijera</h1>
+      <label for="gameOptions">Introduce aquí tu jugada:</label>
+      <form action="">
+        <select name="gameOptions" id="gameOptions" class="js-select">
+          <option value="" disabled selected>Seleccione su jugada</option>
+          <option value="rock">Piedra</option>
+          <option value="paper">Papel</option>
+          <option value="scissors">Tijera</option>
+        </select>
+        <input type="submit" value="Jugar" class="button js-button" disabled />
+        <input
+          type="reset"
+          value="Volver a empezar"
+          class="js-resetButton"
+          disabled
+        />
+      </form>
+      <div class="js-userValue"></div>
+      <div class="js-computerValue"></div>
+      <div class="message">
+        <span class="js-resultMessage">¡Vamos a Jugar!</span>
+      </div>
+      <div><span>Jugador: </span><span class="js-playerCount">0</span></div>
+      <div>
+        <span>Computadora: </span><span class="js-computerCount">0</span>
+      </div>
+      <script src="./js/main.js"></script>
     </div>
-    <div><span>Jugador: </span><span class="js-playerCount">0</span></div>
-    <div><span>Computadora: </span><span class="js-computerCount">0</span></div>
-    <script src="./js/main.js"></script>
-  </div>
   </body>
 </html>

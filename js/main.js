@@ -7,17 +7,8 @@ const resetButton = document.querySelector(".js-resetButton");
 const resultMessage = document.querySelector(".js-resultMessage");
 const playerCountElement = document.querySelector(".js-playerCount");
 const computerCountElement = document.querySelector(".js-computerCount");
-
-// variables globales: jugadas y ganadora
-let userSelection = "";
-let computerSelection = "";
-let winner = "";
-let winnerName = "";
-
-// función para pasar a num el contador
-function parseCount(count) {
-  parseInt(count);
-}
+const computerValueElem = document.querySelector(".js-computerValue");
+const userValueElem = document.querySelector(".js-userValue");
 
 // variables globales contadores
 let playerCount = parseInt(playerCountElement.innerHTML);
@@ -27,6 +18,7 @@ let computerCount = parseInt(computerCountElement.innerHTML);
 function enableButton(value) {
   if (value !== "") {
     button.removeAttribute("disabled");
+    resetButton.removeAttribute("disabled")
   }
 }
 
@@ -36,15 +28,15 @@ function getSelectValue() {
   return userSelection;
 }
 
-// función para consolear la elección de la usuaria
+// función para mostrar la elección de la usuaria
 function getWordForValueUser() {
-  userSelection = getSelectValue();
+  const userSelection = getSelectValue();
   if (userSelection === "rock") {
-    return console.log("La usuaria ha jugado PIEDRA");
+    userValueElem.innerHTML = "Tú has jugado PIEDRA";
   } else if (userSelection === "paper") {
-    return console.log("La usuaria ha jugado PAPEL");
+    userValueElem.innerHTML = "Tú has jugado PAPEL";
   } else if (userSelection === "scissors") {
-    return console.log("La usuaria ha jugado TIJERA");
+    userValueElem.innerHTML = "Tú has jugado TIJERA";
   }
   return userSelection;
 }
@@ -55,20 +47,21 @@ function getRandomNumber(max) {
   return randomNumber;
 }
 
-// función para comparar valor y palabra
+// función para mostrar la elección del ordenador
 function getWordForValueComputer(value) {
   if (value === "rock") {
-    return console.log("El ordenador ha jugado PIEDRA");
+    computerValueElem.innerHTML = "La computadora ha jugado PIEDRA";
   } else if (value === "paper") {
-    return console.log("El ordenador ha jugado PAPEL");
+    computerValueElem.innerHTML = "La computadora ha jugado PAPEL";
   } else {
-    return console.log("El ordenador ha jugado TIJERA");
+    computerValueElem.innerHTML = "La computadora ha jugado TIJERA";
   }
 }
 
 // función jugada ordenador según número aleatorio
 function getComputerSelection(value) {
   const randomNumber = getRandomNumber(9);
+  let computerSelection = "";
   if (value !== "") {
     if (randomNumber <= 3) {
       computerSelection = "rock";
@@ -85,24 +78,23 @@ function getComputerSelection(value) {
 // función para imprimir y asignar ganadora
 function renderWinner(message, winnerValue) {
   resultMessage.innerHTML = message;
-  winner = winnerValue;
+  let winner = winnerValue;
+  return winner;
 }
 
 // función para comparar values
 function compareSelections(value1, value2) {
+  let winner = "";
   if (value1 === value2) {
-    renderWinner("Empate", "");
-  } else if (
-    value1 === "rock" &&
-    (value2 === "paper" || value2 === "scissors")
-  ) {
-    renderWinner("¡Has ganado!", "user");
+    winner = renderWinner("Empate", "");
+  } else if (value1 === "rock" && value2 === "scissors") {
+    winner = renderWinner("¡Has ganado!", "user");
   } else if (value1 === "scissors" && value2 === "paper") {
-    renderWinner("¡Has ganado!", "user");
+    winner = renderWinner("¡Has ganado!", "user");
   } else if (value1 === "paper" && value2 === "rock") {
-    renderWinner("¡Has ganado!", "user");
+    winner = renderWinner("¡Has ganado!", "user");
   } else {
-    renderWinner("¡Has perdido!", "computer");
+    winner = renderWinner("¡Has perdido!", "computer");
   }
   return winner;
 }
@@ -121,6 +113,7 @@ function updateCount(winner) {
 }
 
 function getNameForWinner(winner) {
+  let winnerName = "";
   if (winner === "user") {
     winnerName = "Usuaria";
   } else {
@@ -130,12 +123,11 @@ function getNameForWinner(winner) {
 }
 
 // función reset contadores
-function endGame(count) {
-  getNameForWinner(winner);
-  if (count === 3) {
-    resultMessage.innerHTML = `Partida terminada: has llegado a los 10 puntos y ha ganado la ${winnerName.toUpperCase()}`;
+function endGame(count, winner) {
+  const winnerName = getNameForWinner(winner);
+  if (count === 5) {
+    resultMessage.innerHTML = `Juego terminado: alguna jugadora ha llegado a los 5 puntos. Ha ganado la ${winnerName.toUpperCase()}`;
     button.classList.add("hidden");
-    resetButton.classList.add("showResetButton");
     selectElement.setAttribute("disabled", true);
   }
 }
@@ -145,13 +137,14 @@ function resetCount() {
   computerCount = 0;
   playerCountElement.innerHTML = 0;
   computerCountElement.innerHTML = 0;
+  userValueElem.innerHTML = "";
+  computerValueElem.innerHTML = "";
 }
 
 function changeButtons() {
   button.classList.remove("hidden");
-  resetButton.classList.remove("showResetButton");
-  resetButton.classList.add("hidden");
   button.setAttribute("disabled", true);
+  resetButton.setAttribute("disabled", true)
 }
 
 function changeSelect() {
@@ -166,12 +159,12 @@ function changeMessage() {
 // función manejadora del click
 function handleButtonClick(event) {
   event.preventDefault();
-  getWordForValueUser();
-  getComputerSelection(userSelection);
-  compareSelections(userSelection, computerSelection);
+  const userSelection = getWordForValueUser();
+  const computerSelection = getComputerSelection(userSelection);
+  const winner = compareSelections(userSelection, computerSelection);
   updateCount(winner);
-  endGame(playerCount);
-  endGame(computerCount);
+  endGame(playerCount, winner);
+  endGame(computerCount, winner);
 }
 
 // función manejadora del click del resetButton

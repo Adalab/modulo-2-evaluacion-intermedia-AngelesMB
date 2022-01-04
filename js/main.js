@@ -18,7 +18,7 @@ let computerCount = parseInt(computerCountElement.innerHTML);
 function enableButton(value) {
   if (value !== "") {
     button.removeAttribute("disabled");
-    resetButton.removeAttribute("disabled")
+    resetButton.removeAttribute("disabled");
   }
 }
 
@@ -144,7 +144,7 @@ function resetCount() {
 function changeButtons() {
   button.classList.remove("hidden");
   button.setAttribute("disabled", true);
-  resetButton.setAttribute("disabled", true)
+  resetButton.setAttribute("disabled", true);
 }
 
 function changeSelect() {
